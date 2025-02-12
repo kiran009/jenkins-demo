@@ -2,6 +2,7 @@ node() {
     stage('Checkout') {
         checkout(scm)
         sh 'git clean -xdf'
+        lastChanges since: 'LAST_SUCCESSFUL_BUILD', format:'SIDE', matching: 'LINE'
     }
     stage('Build and test') {
         sh './gradlew build'
